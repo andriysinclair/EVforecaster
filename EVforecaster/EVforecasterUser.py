@@ -169,6 +169,39 @@ class EVforecaster:
                                 ECA_overlay = None,
                                 plot = True):
         
+        """
+        Simulates EV charging demand and generates weekly demand curves using UK-NTS travel data.
+
+        This method performs Monte Carlo simulations of EV charging behaviour over a specified
+        set of weeks. It outputs a matrix of demand curves and optionally compares the simulation
+        results to real-world Electric Chargepoint Analysis (ECA) data, calculating R² statistics
+        to evaluate fit. Plots of the demand curves and R² distributions are saved to disk.
+
+        Args:
+            N_sims (int): Number of Monte Carlo simulations to run.
+            weeks (list): List of travel weeks (1–52) to simulate.
+            home_shift (int): Delay (in minutes) between arrival at home and start of charging.
+            experiment_name (str): Unique name for saving the results and plots.
+            results_folder (str, optional): Directory to save results. Defaults to cfg.root_folder + "/results/".
+            battery_size_bev (list, optional): BEV battery sizes and efficiencies. Defaults to cfg.battery_size_bev.
+            battery_size_phev (list, optional): PHEV battery sizes and efficiencies. Defaults to cfg.battery_size_phev.
+            car_types (list, optional): EV type distribution (e.g., ["PHEV", "BEV"], [0.7, 0.3]).
+            charging_rates (dict, optional): Dictionary mapping charger type to rate and probability.
+            home_charger_likelihood (float, optional): Probability of charger availability at home.
+            work_charger_likelihood (float, optional): Probability of charger availability at work.
+            public_charger_likelihood (float, optional): Probability of charger availability at public locations.
+            min_stop_time_to_charge (int, optional): Minimum stop time (minutes) to initiate charging.
+            SOC_charging_prob (function, optional): Function that determines probability of charging based on SOC.
+            ECA_overlay (list, optional): Weeks (39–52) to overlay with ECA pilot data for validation.
+            plot (bool, optional): Whether to generate and save demand curve and R² plots. Defaults to True.
+
+        Returns:
+            dict: A dictionary with simulation results, including:
+                  - "results_matrix": 2D NumPy array of simulated average demand curves.
+                  - "sim_times": List of runtime per simulation.
+                  - "R2": List of R² values (only if ECA_overlay is provided).
+        """
+        
         results_dict = {}  
 
         df = self.df.copy()
