@@ -163,12 +163,9 @@ ECA_overlay=None)
   - If we set `ECA_overlay=list(range(39,53))`, then this will also plot weeks 39 to 52 (aggregated) of the ECA, calculate the $R^2$ and plot a distribution.
   - If a simulation, indexed by the `experiment_name` parameter, has been completed, then it can be loaded and used with various configurations of `ECA_overlay` for experimentation. 
 
-6. Please see some examples of usage below. Available in `showcase.ipynb`.
+6. Please see some examples of usage below in `showcase.ipynb`.
 
-# Examples
-
-## 
-
+# Plot Showcase
 
 
 
