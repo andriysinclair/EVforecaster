@@ -163,9 +163,22 @@ ECA_overlay=None)
   - If we set `ECA_overlay=list(range(39,53))`, then this will also plot weeks 39 to 52 (aggregated) of the ECA, calculate the $R^2$ and plot a distribution.
   - If a simulation, indexed by the `experiment_name` parameter, has been completed, then it can be loaded and used with various configurations of `ECA_overlay` for experimentation. 
 
-6. Please see some examples of usage below in `showcase.ipynb`.
+6. Please see some examples of usage below, and in `showcase.ipynb`.
 
-# Plot Showcase
+# Examples
+
+**Aggregate weekly forecast from the 2017 UK-NTS compared with weeks 39 - 52 of the ECA. Homeshift=0**
+
+![Total EV Demand](Plots4GitHub/100sims_agg_vs_agg_homeshift0_png.png)
+
+**Aggregate weekly forecast from the 2017 UK-NTS compared with weeks 40 of the ECA. Homeshift=60**
+
+![Week 42 EV Demand](Plots4GitHub/100sims_agg_vs_agg_homeshift60_ECA40_png.png)
+
+# Assumptions & Configuration
+
+**Most of the simulation parameters are available in `config.py`**
+
 
 
 
