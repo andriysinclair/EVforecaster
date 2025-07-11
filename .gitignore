@@ -5,3 +5,6 @@
 /tests
 /dataframes
 /EVforecaster.egg-info
+/.pytest_cache
+/EVforecaster/__pycache__
+/EVforecasterModules/__pycache__
