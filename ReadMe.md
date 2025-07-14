@@ -35,7 +35,7 @@ Various experiments can be ran to test model performance, as compared to the ECA
 
 **From PyPi**
 
-TBC
+`pip install EVforecaster`
 
 # Usage
 
