@@ -27,13 +27,13 @@ Various experiments can be ran to test model performance, as compared to the ECA
 
 # Installation
 
-* From GitHub
+**From GitHub**
 
 1. `git clone https://github.com/andriysinclair/EVforecaster.git`
 2. `cd EVforecaster`
 3. `pip install .`
 
-* From PyPi
+**From PyPi**
 
 TBC
 

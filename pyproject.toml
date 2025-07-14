@@ -4,10 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "EVforecaster"
-version = "0.0.1"
+version = "1.0.0"
 description = "A Python package for EVforc, an EV charging demand forecasting tool."
 readme = "ReadMe.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
+
+license = {file = "LICENSE"}  
+
+authors = [
+  {name = "Andriy Sinclair"}
+]
 
 # Runtime dependencies
 dependencies = [
