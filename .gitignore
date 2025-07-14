@@ -1,4 +1,9 @@
-/data
+# Ignore everything inside data/
+data/*
+
+# But don't ignore the folder itself or this placeholder file
+!data/.gitkeep
+
 /pilot_data
 /output_csvs
 /results

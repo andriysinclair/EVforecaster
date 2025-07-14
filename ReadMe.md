@@ -29,15 +29,62 @@ Various experiments can be ran to test model performance, as compared to the ECA
 
 * From GitHub
 
-`git clone https://github.com/andriysinclair/EVforecaster.git`
-`cd EVforecaster`
-`pip install .`
+1. `git clone https://github.com/andriysinclair/EVforecaster.git`
+2. `cd EVforecaster`
+3. `pip install .`
 
 * From PyPi
 
 TBC
 
 # Usage
+
+## General Usage
+
+1. Download UK-NTS data from [UK Data Service](https://doi.org/10.5255/UKDA-SN-5340-14)
+
+2. Unzip the downloaded file and move the following files from the `tab` folder into the `root/data/` directory.
+   - `trip_eul_2002-2023.tab`
+   - `day_eul_2002-2023.tab`
+   - `household_eul_2002-2023.tab`
+
+2. CD into the root directory and Import `EVforecaster`.
+
+```python 
+from EVforecaster.EVforecasterUser import EVforecaster
+```
+
+3. Create instance of class
+
+```python 
+evf = EVforecaster(travel_years=[2017])
+```
+
+  - `travel_years` should be between 2012 and 2017, this defines the years of travel data that you will use to generate annual charging demand forecasts
+  - Upon creating an instance a dataset corresponding to the travel data of `travel_years` will be generated and moved into `root/dataframes/`, this can take some time. If another instance is made with the same `travel_years` it will not generate the dataset again but rather load an existing one from `root/dataframes/`.
+
+4. Generate demand curves
+
+```python 
+results_dict = evf.generate_forecasts(N_sims=100,
+weeks=list(range(1,53)),
+home_shift=0,
+experiment_name="agg_vs_agg_homeshift0",
+ECA_overlay=None)
+```
+
+  - This will create 100 annual-aggregate weekly demand curves. The mean (over 100 simulations) demand curve, along with 95% confidence intervals is plotted and saved into `root/plots/`. The file name will be `agg_vs_agg_homeshift0.pdf`, or the parameter value of `experiment_name`.
+
+  - Please refer to the class docstring above to understand the `resukts_dict` output.
+
+  - As `ECA_overlay=None`, there will be no comparison with the ECA
+
+5. Compare with ECA
+
+  - If we set `ECA_overlay=list(range(39,53))`, then this will also plot weeks 39 to 52 (aggregated) of the ECA, calculate the $R^2$ and plot a distribution.
+  - If a simulation, indexed by the `experiment_name` parameter, has been completed, then it can be loaded and used with various configurations of `ECA_overlay` for experimentation. 
+
+6. Please see some examples of usage below, and in `showcase.ipynb`.
 
 ## Main Class Documentation
 
@@ -118,52 +165,6 @@ def generate_forecasts(self, N_sims, weeks, home_shift, experiment_name,
 
 
 
-## General Usage
-
-1. Download UK-NTS data from [UK Data Service](https://doi.org/10.5255/UKDA-SN-5340-14)
-
-2. Unzip the downloaded file and move the following files from the `tab` folder into the `root/data/` directory.
-   - `trip_eul_2002-2023.tab`
-   - `day_eul_2002-2023.tab`
-   - `household_eul_2002-2023.tab`
-
-2. CD into the root directory and Import `EVforecaster`.
-
-```python 
-from EVforecaster.EVforecasterUser import EVforecaster
-```
-
-3. Create instance of class
-
-```python 
-evf = EVforecaster(travel_years=[2017])
-```
-
-  - `travel_years` should be between 2012 and 2017, this defines the years of travel data that you will use to generate annual charging demand forecasts
-  - Upon creating an instance a dataset corresponding to the travel data of `travel_years` will be generated and moved into `root/dataframes/`, this can take some time. If another instance is made with the same `travel_years` it will not generate the dataset again but rather load an existing one from `root/dataframes/`.
-
-4. Generate demand curves
-
-```python 
-results_dict = evf.generate_forecasts(N_sims=100,
-weeks=list(range(1,53)),
-home_shift=0,
-experiment_name="agg_vs_agg_homeshift0",
-ECA_overlay=None)
-```
-
-  - This will create 100 annual-aggregate weekly demand curves. The mean (over 100 simulations) demand curve, along with 95% confidence intervals is plotted and saved into `root/plots/`. The file name will be `agg_vs_agg_homeshift0.pdf`, or the parameter value of `experiment_name`.
-
-  - Please refer to the class docstring above to understand the `resukts_dict` output.
-
-  - As `ECA_overlay=None`, there will be no comparison with the ECA
-
-5. Compare with ECA
-
-  - If we set `ECA_overlay=list(range(39,53))`, then this will also plot weeks 39 to 52 (aggregated) of the ECA, calculate the $R^2$ and plot a distribution.
-  - If a simulation, indexed by the `experiment_name` parameter, has been completed, then it can be loaded and used with various configurations of `ECA_overlay` for experimentation. 
-
-6. Please see some examples of usage below, and in `showcase.ipynb`.
 
 # Examples
 
