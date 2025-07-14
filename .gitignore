@@ -20,4 +20,5 @@ plots/*
 /EVforecasterModules/__pycache__
 /misc
 /build
+/build/lib
 /dist
