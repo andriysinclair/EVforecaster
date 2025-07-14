@@ -1,8 +1,13 @@
-# Ignore everything inside data/
+# Ignore everything inside folders
 data/*
+results/*
+plots/*
 
 # But don't ignore the folder itself or this placeholder file
 !data/.gitkeep
+!plots/.gitkeep
+!results/x_labels.pkl
+!results/x.pkl
 
 /pilot_data
 /output_csvs

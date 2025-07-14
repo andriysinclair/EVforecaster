@@ -48,7 +48,7 @@ TBC
    - `day_eul_2002-2023.tab`
    - `household_eul_2002-2023.tab`
 
-2. CD into the root directory and Import `EVforecaster`.
+2. CD into the root directory, start a Python session and Import `EVforecaster`.
 
 ```python 
 from EVforecaster.EVforecasterUser import EVforecaster

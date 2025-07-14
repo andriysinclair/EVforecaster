@@ -93,17 +93,22 @@ class EVforecaster:
         file_names = ["trip_eul_2002-2023.tab", "day_eul_2002-2023.tab", "household_eul_2002-2023.tab"]
 
         # Checking if files exist in the data folder
+        missing_files = []
 
         for filename in file_names:
             filepath = os.path.join(data_folder, filename)
 
             if not os.path.isfile(filepath):
-                raise FileNotFoundError(
-                    f"\nMissing required file: {filename}\n"
-                    "Please download the UK-NTS dataset from:\n"
-                    "  https://doi.org/10.5255/UKDA-SN-5340-14\n"
-                    f"Then move the required files into: {data_folder}"
-                )
+                missing_files.append(filename)
+
+        if len(missing_files) != 0:
+
+            raise FileNotFoundError(
+                f"\nMissing required files: {missing_files}\n"
+                "Please download the UK-NTS dataset from:\n"
+                "  https://doi.org/10.5255/UKDA-SN-5340-14\n"
+                f"Then move the required files into: {data_folder}"
+            )
             
         # Appending paths to instance attributes (IF FOUND IN DIR)
 
@@ -206,11 +211,15 @@ class EVforecaster:
 
         df = self.df.copy()
 
+        # Ensure labels exist
+
+        
+
         # Loading labels for plotting
 
-        with open(self.results_folder + f'/x.pkl', 'rb') as f:
+        with open(self.results_folder + f'x.pkl', 'rb') as f:
             x = pickle.load(f)
-        with open(self.results_folder + f'/x_labels.pkl', 'rb') as f:
+        with open(self.results_folder + f'x_labels.pkl', 'rb') as f:
             x_labels = pickle.load(f)
 
         # Creating paths for plots and results
